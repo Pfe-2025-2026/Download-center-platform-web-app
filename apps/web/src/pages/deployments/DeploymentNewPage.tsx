@@ -48,9 +48,28 @@ export default function DeploymentNewPage() {
 
   const handleDeploy = async () => {
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitting(false);
-    navigate("/deployments");
+    try {
+      const res = await fetch("/api/deployments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          packageId: selectedPackageId,
+          version: selectedVersion,
+          clientIds: selectedClients,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.error || "Failed to create deployment");
+        setSubmitting(false);
+        return;
+      }
+      navigate("/deployments");
+    } catch {
+      alert("Could not reach the server");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const stepLabels = ["Select Package", "Select Version", "Select Clients", "Confirm"];

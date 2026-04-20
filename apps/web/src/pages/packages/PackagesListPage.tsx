@@ -89,9 +89,8 @@ export default function PackagesListPage() {
           className="rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm outline-none focus:border-primary"
         >
           <option value="all">All Architectures</option>
-          <option value="x86_64">x86_64</option>
-          <option value="arm64">arm64</option>
-          <option value="armhf">armhf</option>
+          <option value="amd64">amd64</option>
+          <option value="i386">i386</option>
         </select>
         <select
           value={statusFilter}

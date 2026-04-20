@@ -23,10 +23,38 @@ export default function PackageNewPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // In mock mode, just simulate success
-    await new Promise((r) => setTimeout(r, 600));
-    setSubmitting(false);
-    navigate("/packages");
+
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("architectures", JSON.stringify(architectures));
+      formData.append("version", "1.0.0");
+      formData.append("architecture", architectures[0] || "amd64");
+      if (file) {
+        formData.append("file", file);
+      }
+
+      const token = localStorage.getItem("auth-token");
+      const res = await fetch("/api/packages", {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.error || "Failed to create package");
+        setSubmitting(false);
+        return;
+      }
+
+      navigate("/packages");
+    } catch {
+      alert("Could not reach the server");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
