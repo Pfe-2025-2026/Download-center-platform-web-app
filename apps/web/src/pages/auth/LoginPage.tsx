@@ -28,8 +28,7 @@ export default function LoginPage() {
     setLoading(true);
 
     // Mock / offline login
-    if (isMock || true) {
-      // simulate delay
+    if (isMock) {
       await new Promise((r) => setTimeout(r, 400));
       if (email === MOCK_USER.email && password === "admin123") {
         login(MOCK_USER);
@@ -39,6 +38,28 @@ export default function LoginPage() {
       }
       setLoading(false);
       return;
+    }
+
+    // Real API login
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Invalid email or password");
+        setLoading(false);
+        return;
+      }
+      localStorage.setItem("auth-token", data.token);
+      login({ ...data.user, token: data.token });
+      navigate("/dashboard");
+    } catch {
+      setError("Could not reach the server");
+    } finally {
+      setLoading(false);
     }
   };
 

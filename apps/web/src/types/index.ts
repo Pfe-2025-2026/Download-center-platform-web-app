@@ -13,7 +13,7 @@ export interface LoginCredentials {
 }
 
 /* ─── Packages ─── */
-export type Architecture = "x86_64" | "arm64" | "armhf";
+export type Architecture = "amd64" | "i386";
 export type PackageStatus = "active" | "draft" | "archived";
 export type VersionStatus = "stable" | "beta" | "deprecated";
 

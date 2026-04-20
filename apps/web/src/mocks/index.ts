@@ -20,7 +20,7 @@ export const mockPackages: SoftwarePackage[] = [
     id: "pkg-1",
     name: "core-agent",
     description: "Core monitoring agent for Linux hosts",
-    architectures: ["x86_64", "arm64"],
+    architectures: ["amd64"],
     latestVersion: "3.4.1",
     size: "24.5 MB",
     status: "active",
@@ -33,7 +33,7 @@ export const mockPackages: SoftwarePackage[] = [
     id: "pkg-2",
     name: "telemetry-collector",
     description: "Telemetry data collector daemon",
-    architectures: ["x86_64"],
+    architectures: ["amd64"],
     latestVersion: "2.1.0",
     size: "18.2 MB",
     status: "active",
@@ -46,7 +46,7 @@ export const mockPackages: SoftwarePackage[] = [
     id: "pkg-3",
     name: "log-forwarder",
     description: "Centralized log forwarding agent",
-    architectures: ["x86_64", "arm64", "armhf"],
+    architectures: ["amd64", "i386"],
     latestVersion: "1.8.3",
     size: "12.7 MB",
     status: "active",
@@ -59,7 +59,7 @@ export const mockPackages: SoftwarePackage[] = [
     id: "pkg-4",
     name: "patch-manager",
     description: "Automated OS patch management tool",
-    architectures: ["x86_64"],
+    architectures: ["amd64"],
     latestVersion: "4.0.0-beta",
     size: "31.1 MB",
     status: "draft",
@@ -72,7 +72,7 @@ export const mockPackages: SoftwarePackage[] = [
     id: "pkg-5",
     name: "vpn-connector",
     description: "Site-to-site VPN connector daemon",
-    architectures: ["x86_64", "arm64"],
+    architectures: ["amd64"],
     latestVersion: "2.3.5",
     size: "9.8 MB",
     status: "archived",
@@ -85,23 +85,23 @@ export const mockPackages: SoftwarePackage[] = [
 
 /* ─── Versions ─── */
 export const mockVersions: PackageVersion[] = [
-  { id: "v-1", packageId: "pkg-1", version: "3.4.1", architecture: "x86_64", status: "stable", size: "24.5 MB", checksum: "sha256:abc123", releaseDate: "2026-03-10T14:22:00Z", isRollbackTarget: false },
-  { id: "v-2", packageId: "pkg-1", version: "3.4.0", architecture: "x86_64", status: "stable", size: "24.3 MB", checksum: "sha256:def456", releaseDate: "2026-02-15T10:00:00Z", isRollbackTarget: true },
-  { id: "v-3", packageId: "pkg-1", version: "3.3.0", architecture: "x86_64", status: "deprecated", size: "23.9 MB", checksum: "sha256:ghi789", releaseDate: "2025-12-01T08:00:00Z", isRollbackTarget: false },
-  { id: "v-4", packageId: "pkg-1", version: "3.5.0-beta", architecture: "arm64", status: "beta", size: "25.1 MB", checksum: "sha256:jkl012", releaseDate: "2026-03-14T16:00:00Z", isRollbackTarget: false },
-  { id: "v-5", packageId: "pkg-1", version: "3.4.1", architecture: "arm64", status: "stable", size: "24.8 MB", checksum: "sha256:mno345", releaseDate: "2026-03-10T14:22:00Z", isRollbackTarget: false },
+  { id: "v-1", packageId: "pkg-1", version: "3.4.1", architecture: "amd64", status: "stable", size: "24.5 MB", checksum: "sha256:abc123", releaseDate: "2026-03-10T14:22:00Z", isRollbackTarget: false },
+  { id: "v-2", packageId: "pkg-1", version: "3.4.0", architecture: "amd64", status: "stable", size: "24.3 MB", checksum: "sha256:def456", releaseDate: "2026-02-15T10:00:00Z", isRollbackTarget: true },
+  { id: "v-3", packageId: "pkg-1", version: "3.3.0", architecture: "amd64", status: "deprecated", size: "23.9 MB", checksum: "sha256:ghi789", releaseDate: "2025-12-01T08:00:00Z", isRollbackTarget: false },
+  { id: "v-4", packageId: "pkg-1", version: "3.5.0-beta", architecture: "amd64", status: "beta", size: "25.1 MB", checksum: "sha256:jkl012", releaseDate: "2026-03-14T16:00:00Z", isRollbackTarget: false },
+  { id: "v-5", packageId: "pkg-1", version: "3.4.1", architecture: "i386", status: "stable", size: "24.8 MB", checksum: "sha256:mno345", releaseDate: "2026-03-10T14:22:00Z", isRollbackTarget: false },
 ];
 
 /* ─── Clients ─── */
 export const mockClients: Client[] = [
-  { id: "cl-1", hostname: "prod-web-01", ip: "10.0.1.10", os: "Ubuntu 22.04", architecture: "x86_64", lastSeen: "2026-03-16T08:55:00Z", currentVersion: "3.4.1", status: "online" },
-  { id: "cl-2", hostname: "prod-web-02", ip: "10.0.1.11", os: "Ubuntu 22.04", architecture: "x86_64", lastSeen: "2026-03-16T08:54:00Z", currentVersion: "3.4.1", status: "online" },
-  { id: "cl-3", hostname: "prod-db-01", ip: "10.0.2.10", os: "Debian 12", architecture: "x86_64", lastSeen: "2026-03-16T08:50:00Z", currentVersion: "3.4.0", status: "outdated" },
-  { id: "cl-4", hostname: "edge-node-01", ip: "10.0.3.5", os: "Raspberry Pi OS", architecture: "armhf", lastSeen: "2026-03-15T22:00:00Z", currentVersion: "1.8.3", status: "offline" },
-  { id: "cl-5", hostname: "staging-app-01", ip: "10.0.4.20", os: "Ubuntu 24.04", architecture: "arm64", lastSeen: "2026-03-16T08:53:00Z", currentVersion: "3.5.0-beta", status: "online" },
-  { id: "cl-6", hostname: "prod-worker-01", ip: "10.0.1.30", os: "Rocky Linux 9", architecture: "x86_64", lastSeen: "2026-03-16T07:10:00Z", currentVersion: "3.4.1", status: "online" },
-  { id: "cl-7", hostname: "prod-worker-02", ip: "10.0.1.31", os: "Rocky Linux 9", architecture: "x86_64", lastSeen: "2026-03-14T12:00:00Z", currentVersion: "3.3.0", status: "outdated" },
-  { id: "cl-8", hostname: "dev-box-01", ip: "192.168.1.100", os: "Fedora 39", architecture: "x86_64", lastSeen: "2026-03-16T08:56:00Z", currentVersion: "3.4.1", status: "online" },
+  { id: "cl-1", hostname: "prod-web-01", ip: "10.0.1.10", os: "Debian 12", architecture: "amd64", lastSeen: "2026-03-16T08:55:00Z", currentVersion: "3.4.1", status: "online" },
+  { id: "cl-2", hostname: "prod-web-02", ip: "10.0.1.11", os: "Linux Mint 21.3", architecture: "amd64", lastSeen: "2026-03-16T08:54:00Z", currentVersion: "3.4.1", status: "online" },
+  { id: "cl-3", hostname: "prod-db-01", ip: "10.0.2.10", os: "Debian 12", architecture: "amd64", lastSeen: "2026-03-16T08:50:00Z", currentVersion: "3.4.0", status: "outdated" },
+  { id: "cl-4", hostname: "edge-node-01", ip: "10.0.3.5", os: "Linux Mint 21.3", architecture: "i386", lastSeen: "2026-03-15T22:00:00Z", currentVersion: "1.8.3", status: "offline" },
+  { id: "cl-5", hostname: "staging-app-01", ip: "10.0.4.20", os: "Debian 12", architecture: "amd64", lastSeen: "2026-03-16T08:53:00Z", currentVersion: "3.5.0-beta", status: "online" },
+  { id: "cl-6", hostname: "prod-worker-01", ip: "10.0.1.30", os: "Linux Mint 22", architecture: "amd64", lastSeen: "2026-03-16T07:10:00Z", currentVersion: "3.4.1", status: "online" },
+  { id: "cl-7", hostname: "prod-worker-02", ip: "10.0.1.31", os: "Debian 11", architecture: "amd64", lastSeen: "2026-03-14T12:00:00Z", currentVersion: "3.3.0", status: "outdated" },
+  { id: "cl-8", hostname: "dev-box-01", ip: "192.168.1.100", os: "Linux Mint 22", architecture: "amd64", lastSeen: "2026-03-16T08:56:00Z", currentVersion: "3.4.1", status: "online" },
 ];
 
 /* ─── Deployments ─── */

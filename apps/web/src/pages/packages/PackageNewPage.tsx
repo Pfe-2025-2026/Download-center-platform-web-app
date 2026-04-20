@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { FileUpload } from "@/components/ui/FileUpload";
 import type { Architecture } from "@/types";
 
-const ARCH_OPTIONS: Architecture[] = ["x86_64", "arm64", "armhf"];
+const ARCH_OPTIONS: Architecture[] = ["amd64", "i386"];
 
 export default function PackageNewPage() {
   const navigate = useNavigate();
